@@ -1,0 +1,162 @@
+﻿<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FitC | Leaderboard</title>
+<style>
+:root{--ink:#163e35;--muted:#64766e;--green:#166b4b;--lime:#d8ef92;--line:#e1e8df;--paper:#f6f8f3;--white:#fff;--amber:#946510}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,"Segoe UI",Arial,sans-serif;font-size:14px;line-height:1.5}
+button,input,select{font:inherit}button{cursor:pointer}button:disabled{cursor:wait;opacity:.6}a{color:inherit}button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #81ac37;outline-offset:3px}[hidden]{display:none!important}
+.topbar{background:#fff;border-bottom:1px solid var(--line)}.topinner{max-width:1240px;margin:auto;min-height:76px;padding:16px 32px;display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-size:24px;font-weight:800;letter-spacing:-1px}.brandmark{background:var(--green);color:var(--lime);height:36px;width:36px;display:grid;place-items:center;border-radius:11px}.brandmark svg{width:24px}.brand small{font-size:11px;letter-spacing:1.5px;font-weight:600;border-left:1px solid var(--line);padding-left:18px;margin-left:10px;color:var(--muted)}
+.topright{display:flex;gap:14px;align-items:center;font-size:12px;color:var(--muted)}.badge{display:inline-flex;align-items:center;gap:7px;padding:6px 11px;border-radius:30px;background:#eef5e5;color:#40612d;font-size:12px;font-weight:600}.dot{height:6px;width:6px;border-radius:50%;background:#76a634}
+main{max-width:1240px;margin:auto;padding:32px}.hero{position:relative;overflow:hidden;background:#173f35;color:white;border-radius:22px;padding:35px 40px;display:flex;align-items:center;justify-content:space-between;gap:32px}.eyebrow{font-size:10px;font-weight:700;letter-spacing:2px;color:#bada9d;margin:0 0 14px}.hero h1{font-size:clamp(29px,4vw,44px);font-weight:650;letter-spacing:-1.6px;line-height:1.16;margin:0 0 14px}.hero h1 span{color:var(--lime)}.hero p{color:#c7d7ce;max-width:520px;margin:0;font-size:14px}.hero-footer{margin-top:22px;display:flex;flex-wrap:wrap;gap:9px}.hero-footer span{font-size:11px;border:1px solid #4d685a;border-radius:30px;padding:5px 12px;color:#e2ecdf}.hero-art{flex:0 0 180px;height:180px;border:1px solid #688160;border-radius:50%;display:grid;place-items:center;position:relative;background:radial-gradient(circle,#42624033 0,#203f3600 65%)}.hero-art:before{content:"";position:absolute;inset:14px;border:1px dashed #789067;border-radius:50%}.hero-art svg{width:86px;height:86px;stroke:var(--lime);fill:none;stroke-width:1.3}.hero-art small{position:absolute;bottom:26px;font-size:9px;letter-spacing:2px;color:#d6e5c5}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:22px 0 28px}.stat{background:#fff;border:1px solid var(--line);padding:20px 24px;border-radius:14px;display:flex;justify-content:space-between;gap:12px}.stat-label{font-size:12px;color:var(--muted);margin-bottom:6px}.stat-value{font-size:28px;font-weight:700;letter-spacing:-1px}.stat-unit{font-size:12px;color:var(--muted);font-weight:400;letter-spacing:0;margin-left:6px}.stat-note{font-size:11px;color:var(--muted);margin-top:4px}.stat-icon{width:36px;height:36px;background:#eff5e9;border-radius:10px;display:grid;place-items:center;color:var(--green)}.stat-icon svg{width:18px;fill:none;stroke:currentColor;stroke-width:1.6}
+.sectionhead{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px}h2{font-size:22px;letter-spacing:-.6px;margin:0}.subtitle{margin:3px 0 0;color:var(--muted);font-size:12px}.button{border:1px solid #d4ded0;background:#fff;color:var(--ink);padding:9px 14px;border-radius:9px;font-size:12px;font-weight:600;min-height:40px}.button:hover{background:#edf4e7}.refresh{display:flex;gap:8px;align-items:center}.refresh svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8}
+.categorybar{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:18px}.categories{display:flex;gap:5px;padding:5px;background:#e9eee4;border-radius:12px}.category{border:0;background:transparent;color:#687365;padding:10px 18px;border-radius:8px;font-size:13px;font-weight:600;min-height:42px}.category[aria-pressed=true]{background:var(--green);color:#fff;box-shadow:0 2px 5px #16482a15}.category .count{padding:1px 6px;background:#ffffff25;border-radius:5px;font-size:11px;margin-left:7px}.date{font-size:11px;color:var(--muted)}
+.board{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden}.board-top{padding:22px 24px;display:flex;justify-content:space-between;align-items:center;gap:20px;background:linear-gradient(100deg,#f1f6e9,#ffffff)}.board-top h3{font-size:15px;margin:0 0 3px}.board-top p{font-size:12px;color:var(--muted);margin:0}.best{display:flex;align-items:center;gap:12px;flex-shrink:0}.best-icon{color:#a17b25;font-size:24px}.best strong{font-size:24px;letter-spacing:-.7px}.best small{display:block;font-size:10px;color:var(--muted)}
+.toolbar{display:flex;gap:12px;padding:18px 24px;align-items:end;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.field{display:flex;flex-direction:column;gap:5px}.field label{font-size:10px;color:var(--muted);font-weight:600}.search{flex:1}.field input,.field select{background:#fff;border:1px solid #dce4d7;border-radius:8px;padding:10px 12px;min-height:42px;color:var(--ink);width:100%}.field input::placeholder{color:#889285}.department{width:235px}.table-wrap{overflow-x:auto}table{border-collapse:collapse;width:100%;text-align:left}th{font-size:10px;color:#778070;font-weight:600;letter-spacing:.6px;text-transform:uppercase;background:#fafbf8;padding:13px 16px;white-space:nowrap}td{padding:15px 16px;border-top:1px solid #eff2eb;font-size:12px}th:first-child,td:first-child{padding-left:24px;width:70px}tr:hover td{background:#fbfcf8}.rank{background:#f0f3ed;min-width:30px;height:30px;padding:0 7px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-weight:700;color:#61705b}.rank.first{background:#f8efd0;color:#8b6a15}.person{display:flex;align-items:center;gap:11px}.avatar{width:34px;height:34px;border-radius:50%;background:#e8f0dd;display:grid;place-items:center;font-size:10px;font-weight:700;color:#526748;flex-shrink:0}.name{font-size:12px;font-weight:650}.dept{font-size:10px;color:var(--muted);margin-top:2px}.points{font-variant-numeric:tabular-nums}.total{font-size:17px;font-weight:750;color:var(--green);white-space:nowrap}.total small{font-size:10px;font-weight:400;color:var(--muted)}.detail-button{border:0;background:#f1f5ec;color:var(--green);border-radius:7px;padding:8px 11px;font-size:11px;font-weight:650;min-height:36px}.pagination{padding:16px 24px;display:flex;justify-content:space-between;align-items:center;gap:12px;border-top:1px solid var(--line);font-size:11px;color:var(--muted)}.pagebuttons{display:flex;align-items:center;gap:10px}.pagebuttons .button{padding:6px 11px;min-height:34px}.empty{padding:55px 24px;text-align:center;color:var(--muted)}.empty strong{display:block;color:var(--ink);font-size:17px;margin-bottom:6px}.notice{margin:12px 0;font-size:12px;color:var(--muted)}.error{padding:16px 20px;border:1px solid #ebc9bd;background:#fff3ed;color:#873d24;border-radius:10px;margin:16px 0}.skeleton{height:12px;border-radius:8px;background:#eef2e8;margin:20px 24px;width:70%;animation:pulse 1.5s infinite}.loading{padding:15px 0 25px}.loading p{margin:8px 24px;color:var(--muted)}@keyframes pulse{50%{opacity:.45}}
+.rules{margin-top:24px;border:1px solid var(--line);background:#fff;border-radius:14px;padding:18px 22px}.rules summary{font-size:13px;font-weight:650;cursor:pointer}.weights{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;margin:20px 0}.weight strong{font-size:23px;display:block;color:var(--green)}.weight span{font-size:11px;color:var(--muted)}.rules p{font-size:12px;color:var(--muted);max-width:920px}.footer{display:flex;justify-content:space-between;gap:15px;padding:26px 0 0;font-size:11px;color:#76816e}
+dialog{border:1px solid var(--line);border-radius:18px;padding:28px;max-width:480px;width:calc(100% - 32px);max-height:85vh;overflow:auto;color:var(--ink);box-shadow:0 25px 80px #10362833}dialog::backdrop{background:#0e2c2866;backdrop-filter:blur(3px)}.modal-head{display:flex;align-items:start;justify-content:space-between;gap:16px}dialog h2{font-size:20px;margin:4px 0}.close{border:0;background:#edf2e6;border-radius:50%;width:32px;height:32px;font-size:22px;flex-shrink:0;color:var(--ink)}.modal-total{margin:20px 0;padding:18px;background:#f0f5e7;border-radius:12px;display:flex;align-items:center;justify-content:space-between}.modal-total strong{font-size:30px;color:var(--green)}.metric{margin:19px 0}.metric-top{display:flex;justify-content:space-between;font-size:13px}.metric p{font-size:11px;color:var(--muted);margin:5px 0}progress{display:block;width:100%;height:6px;appearance:none;border:0;border-radius:10px;overflow:hidden;background:#edf1e7;margin-top:9px}progress::-webkit-progress-bar{background:#edf1e7}progress::-webkit-progress-value{background:#4f8752;border-radius:10px}progress::-moz-progress-bar{background:#4f8752}.modal-foot{font-size:11px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px}
+@media(max-width:900px){.score-col{display:none}.hero-art{flex-basis:145px;height:145px}.hero{padding:30px}.stat{padding:17px}.stat-icon{display:none}}
+@media(max-width:600px){main{padding:20px 14px}.topinner{padding:13px 18px;min-height:64px}.brand small{display:none}.topright .program-year{display:none}.hero{padding:26px 23px;border-radius:16px}.hero h1{font-size:31px}.hero-art{display:none}.hero p{font-size:12px}.hero-footer span{font-size:10px}.stats{gap:8px;margin:14px 0 24px}.stat{padding:13px 10px}.stat-label{font-size:10px}.stat-value{font-size:22px}.stat-note{font-size:9px}.stat-unit{display:none}h2{font-size:20px}.sectionhead{align-items:start}.subtitle{font-size:11px}.refresh{font-size:11px;padding:8px 10px}.categorybar{display:block}.categories{width:100%}.category{flex:1;padding:10px 5px;font-size:11px}.category .count{margin-left:3px}.date{margin:9px 0 0}.board-top{padding:16px;gap:12px}.board-top h3{font-size:13px}.board-top p{font-size:10px}.best strong{font-size:21px}.best-icon{display:none}.toolbar{padding:14px;flex-wrap:wrap;gap:10px}.search{flex-basis:100%}.department{flex:1;width:auto}.reset{min-height:42px}th,td{padding:12px 9px}th:first-child,td:first-child{padding-left:12px;width:45px}.avatar{display:none}.name{font-size:11px;max-width:160px}.total{font-size:15px}.total small{display:none}.detail-button{padding:8px;font-size:10px}.pagination{padding:14px 12px;font-size:10px;flex-wrap:wrap}.pagebuttons{margin-left:auto}.weights{gap:12px;grid-template-columns:repeat(3,1fr)}.weight strong{font-size:21px}.footer{display:block}.footer span{display:block;margin-bottom:4px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="topinner">
+<a class="brand" href="#" aria-label="FitC beranda"><span class="brandmark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h5l3-7 4 14 3-7h5"/></svg></span>FitC<small>EMPLOYEE WELLNESS</small></a>
+<div class="topright"><span class="program-year">PROGRAM 2026</span><span id="program-status" class="badge"><span class="dot"></span>FitC Challenge</span></div>
+</div></header>
+<main>
+<section class="hero" aria-labelledby="hero-title"><div><div class="eyebrow">SATU LANGKAH LEBIH SEHAT</div><h1 id="hero-title">Konsisten bergerak.<br><span>Tumbuh lebih sehat.</span></h1><p>Setiap langkah berarti. Lihat progres bersama dan jaga semangat untuk membangun kebiasaan sehat setiap hari.</p><div class="hero-footer"><span>Mulai 1 Oktober 2026</span><span>30 menit aktif setiap hari</span></div></div>
+<div class="hero-art" aria-hidden="true"><svg viewBox="0 0 80 80"><path d="M27 17h26v15c0 14-7 21-13 21S27 46 27 32V17Z"/><path d="M27 22H17v8c0 9 5 14 14 14M53 22h10v8c0 9-5 14-14 14M40 53v11m-12 3h24M34 27l4 4 8-9"/></svg><small>BETTER TOGETHER</small></div></section>
+<section class="stats" aria-label="Ringkasan program">
+<div class="stat"><div><div class="stat-label">Peserta terdaftar</div><span class="stat-value" id="stat-total">—</span><span class="stat-unit">karyawan</span><div class="stat-note">Bergerak bersama FitC</div></div><div class="stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 21v-3a6 6 0 0 1 12 0v3M16 5a3 3 0 0 1 0 6m2 4a5 5 0 0 1 3 5"/></svg></div></div>
+<div class="stat"><div><div class="stat-label">Masuk leaderboard</div><span class="stat-value" id="stat-ranked">—</span><span class="stat-unit">peserta</span><div class="stat-note">Data awal sudah lengkap</div></div><div class="stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 21V11h5v10m0 0V4h7v17m0 0V8h6v13"/></svg></div></div>
+<div class="stat"><div><div class="stat-label">Hari penilaian</div><span class="stat-value" id="stat-days">—</span><span class="stat-unit">hari</span><div class="stat-note" id="stat-date">Menunggu data terbaru</div></div><div class="stat-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 2v6m10-6v6M3 11h18m-14 5h4"/></svg></div></div>
+</section>
+<div class="sectionhead"><div><h2>Leaderboard karyawan</h2><p class="subtitle">Progres kecil, dampak besar. Temukan posisimu.</p></div><button id="refresh" class="button refresh" type="button"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M16 8a6 6 0 1 0 0 5M16 3v5h-5"/></svg>Muat ulang</button></div>
+<div class="categorybar"><div class="categories" role="group" aria-label="Kategori leaderboard">
+<button class="category" type="button" data-category="Overweight" aria-pressed="true">Overweight <span class="count" id="count-over">—</span></button>
+<button class="category" type="button" data-category="Under/Normal Weight" aria-pressed="false">Under / Normal Weight <span class="count" id="count-normal">—</span></button></div><div class="date" id="asof">Skor berdasarkan perhitungan terakhir</div></div>
+<div id="error" class="error" role="alert" hidden></div>
+<p id="preview-note" class="notice" hidden>Pratinjau lokal · data contoh dari hasil perhitungan project.</p>
+<section class="board" aria-label="Peringkat peserta" id="board" aria-busy="true">
+<div class="board-top"><div><h3 id="category-title">Kategori Overweight</h3><p id="category-description">Poin BMI berdasarkan penurunan relatif terhadap peserta terbaik.</p></div><div class="best"><span class="best-icon" aria-hidden="true">✦</span><div><small>SKOR TERTINGGI</small><strong id="best-score">—</strong><small id="best-note">dari 100 poin</small></div></div></div>
+<div class="toolbar"><div class="field search"><label for="search">Cari peserta</label><input id="search" type="search" placeholder="Ketik nama karyawan…" autocomplete="off"></div><div class="field department"><label for="department">Departemen</label><select id="department"><option value="">Semua departemen</option></select></div><button class="button reset" id="reset" type="button">Reset</button></div>
+<div class="loading" id="loading" role="status"><p>Memuat peringkat peserta…</p><div class="skeleton"></div><div class="skeleton" style="width:85%"></div><div class="skeleton" style="width:60%"></div></div>
+<div class="table-wrap" id="table-wrap" hidden><table><thead><tr><th scope="col">Rank</th><th scope="col">Peserta</th><th class="score-col" scope="col">BMI <small>/40</small></th><th class="score-col" scope="col">Olahraga <small>/40</small></th><th class="score-col" scope="col">Timbang <small>/10</small></th><th class="score-col" scope="col">Paguyuban <small>/5</small></th><th class="score-col" scope="col">Training <small>/5</small></th><th scope="col">Total</th><th scope="col">Rincian</th></tr></thead><tbody id="rows"></tbody></table></div>
+<div id="empty" class="empty" hidden><strong id="empty-title">Peserta tidak ditemukan</strong><span id="empty-description">Coba nama lain atau ubah filter departemen.</span></div>
+<div class="pagination"><span id="result-count" role="status" aria-live="polite">Menunggu data…</span><div class="pagebuttons"><button type="button" class="button" id="prev" aria-label="Halaman sebelumnya" disabled>←</button><span id="page-info">1 / 1</span><button type="button" class="button" id="next" aria-label="Halaman berikutnya" disabled>→</button></div></div>
+</section>
+<p class="notice" id="incomplete" hidden></p>
+<p class="notice">Poin sama mendapat peringkat sama, misalnya 1, 1, 3. Filter tidak mengubah peringkat dalam kategori.</p>
+<details class="rules"><summary>Cara penilaian & bobot poin</summary><div class="weights"><div class="weight"><strong>40%</strong><span>Perubahan BMI</span></div><div class="weight"><strong>40%</strong><span>Olahraga teratur</span></div><div class="weight"><strong>10%</strong><span>Penimbangan</span></div><div class="weight"><strong>5%</strong><span>Hadir paguyuban</span></div><div class="weight"><strong>5%</strong><span>Hadir training</span></div></div>
+<p><b>Overweight:</b> penurunan BMI dibagi penurunan tertinggi dalam kategori × 40. BMI tetap atau naik mendapat 0 poin. <b>Under/normal weight:</b> BMI dalam rentang 18,5–24,9 mendapat 40 poin; di luar rentang mendapat 20 poin. Kategori tetap mengikuti BMI awal.</p>
+<p><b>Olahraga:</b> total aktivitas minimal 30 menit per hari, dibagi seluruh hari penilaian sejak 1 Oktober 2026 × 40. <b>Penimbangan:</b> jumlah ID penimbangan unik yang diikuti dibagi seluruh ID penimbangan unik yang tercatat pada periode penilaian × 10. ID yang sama hanya dihitung sekali per peserta. <b>Kehadiran:</b> jumlah ID kegiatan unik yang dihadiri dibagi seluruh ID kegiatan unik yang tercatat pada periode penilaian × 5, terpisah untuk training dan paguyuban. ID yang sama hanya dihitung sekali. Jika belum ada kegiatan, poin komponen tersebut 0.</p></details>
+<footer class="footer"><span><b>FitC</b> · Sehat bersama, konsisten bersama.</span><span>Data dikelola oleh pengelola program FitC.</span></footer>
+</main>
+<dialog id="detail" aria-labelledby="detail-name"><div class="modal-head"><div><span class="badge" id="detail-category"></span><h2 id="detail-name"></h2><div class="subtitle" id="detail-department"></div></div><button class="close" id="close-detail" type="button" aria-label="Tutup rincian">×</button></div><div class="modal-total"><span id="detail-rank"></span><div><strong id="detail-total"></strong><span> / 100</span></div></div><div id="metrics"></div><div class="modal-foot" id="detail-date"></div></dialog>
+<script>
+/* Data fetched through the same-origin Netlify Function. */
+(function() {
+'use strict';
+const $=id=>document.getElementById(id);
+const state={data:null,category:'Overweight',query:'',department:'',page:1,size:20,loading:false};
+const fmt=new Intl.NumberFormat('id-ID',{maximumFractionDigits:2});
+const formatDate=value=>value ? new Intl.DateTimeFormat('id-ID',{day:'numeric',month:'short',year:'numeric',timeZone:'Asia/Jakarta'}).format(new Date(value+'T00:00:00Z')) : '—';
+const text=(id,value)=>{$(id).textContent=value;};
+function element(tag,className,content){const e=document.createElement(tag);if(className)e.className=className;if(content!=null)e.textContent=content;return e;}
+function today(){return new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Jakarta',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());}
+function render() {
+ if(!state.data)return;
+ const d=state.data,categoryRows=d.rows.filter(r=>r.category===state.category);
+ document.querySelectorAll('[data-category]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.category===state.category)));
+ text('count-over',d.rows.filter(r=>r.category==='Overweight').length);text('count-normal',d.rows.filter(r=>r.category==='Under/Normal Weight').length);
+ text('stat-total',fmt.format(d.totalParticipants));text('stat-ranked',fmt.format(d.rows.length));
+ const elapsed=d.asOf&&d.asOf>=d.startDate?Math.floor((Date.parse(d.asOf)-Date.parse(d.startDate))/86400000)+1:0;
+ text('stat-days',fmt.format(elapsed));text('stat-date',d.asOf?'Sampai '+formatDate(d.asOf):'Belum ada hasil penilaian');
+ text('asof',d.asOf?'Skor per '+formatDate(d.asOf):'Belum ada hasil penilaian');
+ text('program-status',d.endDate&&d.endDate<=today()?'Program selesai':'Program berjalan');
+ text('category-title','Kategori '+state.category.replace('Under/Normal','Under / Normal'));
+ text('category-description',state.category==='Overweight'?'Poin BMI berdasarkan penurunan relatif terhadap peserta terbaik.':'40 poin untuk BMI normal, 20 poin jika di luar rentang normal.');
+ const best=categoryRows.length?Math.max(...categoryRows.map(r=>r.total)):null;
+ text('best-score',best==null?'—':fmt.format(best));
+ const leaders=categoryRows.filter(r=>r.rank===1).length;
+ text('best-note',leaders>1?leaders+' peserta berbagi rank 1':'dari 100 poin');
+ const filtered=categoryRows.filter(r=>(!state.department||r.department===state.department)&&r.name.toLocaleLowerCase('id-ID').includes(state.query.toLocaleLowerCase('id-ID')));
+ const pages=Math.max(1,Math.ceil(filtered.length/state.size));state.page=Math.min(state.page,pages);
+ const offset=(state.page-1)*state.size,shown=filtered.slice(offset,offset+state.size);
+ $('rows').replaceChildren();
+ shown.forEach(r=>{
+  const tr=element('tr');const rank=element('td');rank.append(element('span','rank'+(r.rank===1?' first':''),r.rank));tr.append(rank);
+  const personCell=element('td'),person=element('div','person'),initials=r.name.trim().split(/\s+/).slice(0,2).map(w=>w[0]||'').join('');
+  const avatar=element('span','avatar',initials);avatar.setAttribute('aria-hidden','true');person.append(avatar);
+  const name=element('div');name.append(element('div','name',r.name),element('div','dept',r.department||'Departemen belum diisi'));person.append(name);personCell.append(person);tr.append(personCell);
+  ['bmi','workout','weighing','paguyuban','training'].forEach(k=>tr.append(element('td','score-col points',fmt.format(r[k]))));
+  const total=element('td','total points',fmt.format(r.total));total.append(element('small','',' / 100'));tr.append(total);
+  const action=element('td'),button=element('button','detail-button','Lihat');button.type='button';button.setAttribute('aria-label','Lihat rincian '+r.name);button.addEventListener('click',()=>detail(r));action.append(button);tr.append(action);
+  $('rows').append(tr);
+ });
+ $('loading').hidden=true;$('table-wrap').hidden=!shown.length;$('empty').hidden=shown.length>0;
+ text('empty-title',categoryRows.length?'Peserta tidak ditemukan':'Belum ada peringkat di kategori ini');
+ text('empty-description',categoryRows.length?'Coba nama lain atau ubah filter departemen.':'Peringkat akan tampil setelah pengelola melengkapi dan menghitung data.');
+ text('result-count',filtered.length?fmt.format(offset+1)+'–'+fmt.format(offset+shown.length)+' dari '+fmt.format(filtered.length)+' peserta':'0 peserta');
+ text('page-info',state.page+' / '+pages);$('prev').disabled=state.page<=1;$('next').disabled=state.page>=pages;
+ $('incomplete').hidden=!d.incomplete;text('incomplete',fmt.format(d.incomplete)+' peserta belum masuk peringkat karena data awal belum lengkap.');
+}
+function detail(r) {
+ text('detail-name',r.name);text('detail-category',r.category);text('detail-department',r.department);
+ text('detail-rank','Peringkat #'+r.rank);text('detail-total',fmt.format(r.total));text('detail-date','Skor per '+formatDate(state.data.asOf)+'. Peringkat dihitung dalam kategori peserta.');
+ $('metrics').replaceChildren();
+ const specs=[
+ ['BMI',r.bmi,40,r.category==='Overweight'?'Penurunan BMI relatif terhadap peserta terbaik.':'BMI normal 40 poin; di luar rentang normal 20 poin.'],
+ ['Olahraga',r.workout,40,r.activeDays+' dari '+r.elapsedDays+' hari memenuhi minimal 30 menit.'],
+ ['Penimbangan',r.weighing,10,r.weighingRequired?r.weighingFulfilled+' dari '+r.weighingRequired+' kegiatan penimbangan tercatat diikuti.':'Belum ada ID penimbangan yang tercatat pada periode penilaian.'],
+ ['Paguyuban',r.paguyuban,5,r.paguyubanRequired?r.paguyubanPresent+' dari '+r.paguyubanRequired+' kegiatan tercatat dihadiri.':'Belum ada ID kegiatan yang tercatat pada periode penilaian.'],
+ ['Training',r.training,5,r.trainingRequired?r.trainingPresent+' dari '+r.trainingRequired+' kegiatan tercatat dihadiri.':'Belum ada ID kegiatan yang tercatat pada periode penilaian.']];
+ specs.forEach(([label,value,max,note])=>{
+  const block=element('div','metric'),top=element('div','metric-top');top.append(element('strong','',label),element('span','points',fmt.format(value)+' / '+max));
+  const bar=element('progress');bar.max=max;bar.value=value;bar.setAttribute('aria-label','Poin '+label);
+  block.append(top,bar,element('p','',note));$('metrics').append(block);
+ });$('detail').showModal();
+}
+function success(data) {
+ state.loading=false;state.data=data;$('refresh').disabled=false;$('board').setAttribute('aria-busy','false');$('error').hidden=true;
+ const departments=[...new Set(data.rows.map(r=>r.department).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
+ $('department').replaceChildren();const all=element('option','','Semua departemen');all.value='';$('department').append(all);
+ departments.forEach(name=>{const option=element('option','',name);option.value=name;$('department').append(option);});
+ if(!departments.includes(state.department))state.department='';$('department').value=state.department;
+ render();
+}
+function failure(error) {
+ state.loading=false;$('refresh').disabled=false;$('board').setAttribute('aria-busy','false');$('loading').hidden=true;
+ $('error').hidden=false;text('error',(error&&error.message)||'Data belum dapat dimuat. Klik Muat ulang untuk mencoba lagi.');
+ if(!state.data){$('empty').hidden=false;text('empty-title','Leaderboard belum tersedia');text('empty-description','Coba muat ulang atau hubungi pengelola FitC.');text('result-count','Data belum tersedia');}
+}
+function load() {
+ if(state.loading)return;state.loading=true;$('refresh').disabled=true;$('board').setAttribute('aria-busy','true');$('error').hidden=true;
+ if(!state.data){$('loading').hidden=false;$('empty').hidden=true;}
+ const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),25000);
+ fetch('/api/leaderboard',{signal:controller.signal,headers:{Accept:'application/json'}})
+ .then(async response=>{
+   const body=await response.json();
+   if(!response.ok || !body.ok)throw new Error(body.error||'Leaderboard belum dapat dimuat.');
+   success(body.data);
+ })
+ .catch(error=>failure({message:error.name==='AbortError'?'Waktu tunggu habis. Klik Muat ulang untuk mencoba lagi.':error.message}))
+ .finally(()=>clearTimeout(timer));
+}
+document.querySelectorAll('[data-category]').forEach(b=>b.addEventListener('click',()=>{state.category=b.dataset.category;state.page=1;render();}));
+$('search').addEventListener('input',e=>{state.query=e.target.value.trim();state.page=1;render();});
+$('department').addEventListener('change',e=>{state.department=e.target.value;state.page=1;render();});
+$('reset').addEventListener('click',()=>{state.query='';state.department='';state.page=1;$('search').value='';$('department').value='';render();});
+$('prev').addEventListener('click',()=>{state.page--;render();});$('next').addEventListener('click',()=>{state.page++;render();});
+$('refresh').addEventListener('click',load);$('close-detail').addEventListener('click',()=>$('detail').close());
+$('detail').addEventListener('click',e=>{if(e.target===$('detail')){const r=$('detail').getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)$('detail').close();}});
+load();
+})();
+</script>
+</body>
+</html>
