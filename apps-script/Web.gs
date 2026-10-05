@@ -1,4 +1,4 @@
-﻿/** Run once from the bound Apps Script editor before web-app deployment. */
+/** Run once from the bound Apps Script editor before web-app deployment. */
 function configureLeaderboard_() {
   var ss = fitcSpreadsheet_();
   PropertiesService.getScriptProperties().setProperty('FITC_SPREADSHEET_ID', ss.getId());

@@ -1,4 +1,4 @@
-﻿const rowFields=['key','category','rank','name','department','total','bmi','workout','weighing','paguyuban','training','activeDays','elapsedDays','weighingFulfilled','weighingRequired','paguyubanPresent','paguyubanRequired','trainingPresent','trainingRequired'];
+const rowFields=['key','category','rank','name','department','total','bmi','workout','weighing','paguyuban','training','activeDays','elapsedDays','weighingFulfilled','weighingRequired','paguyubanPresent','paguyubanRequired','trainingPresent','trainingRequired'];
 const numericFields=rowFields.filter(k=>!['key','category','name','department'].includes(k));
 const limits={total:100,bmi:40,workout:40,weighing:10,paguyuban:5,training:5};
 const message='Leaderboard belum dapat dimuat. Coba lagi atau hubungi pengelola FitC.';

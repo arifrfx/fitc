@@ -1,4 +1,4 @@
-﻿import http from 'node:http';
+import http from 'node:http';
 import {readFile} from 'node:fs/promises';
 import handler from './netlify/functions/leaderboard.mjs';
 const html=await readFile(new URL('./public/index.html',import.meta.url));

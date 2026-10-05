@@ -1,4 +1,4 @@
-﻿# FitC untuk Netlify
+# FitC untuk Netlify
 
 Paket ini memuat halaman leaderboard dan Netlify Function. Google Sheets tetap menjadi database; Apps Script tetap menghitung skor. Tidak memakai iframe. Tidak perlu npm install untuk menjalankan server lokal dan pengujian (Node.js 22+).
 
